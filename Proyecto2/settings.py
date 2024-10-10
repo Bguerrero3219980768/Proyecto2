@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "Proyecto2024.apps.Proyecto2024Config"
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -75,8 +76,12 @@ WSGI_APPLICATION = "Proyecto2.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "mydatabase",
+        "USER": "root",
+        "PASSWORD": "UFPS2024",
+        "HOST": "129.146.249.153",
+        "PORT":"3385",
     }
 }
 
