@@ -16,6 +16,7 @@ class Usuario(models.Model):
 
     class Meta:
         abstract = True
+        
 class Estudiante(Usuario):
     matricula = models.CharField(max_length=50, unique=True)
 
