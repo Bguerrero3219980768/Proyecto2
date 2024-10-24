@@ -1,0 +1,65 @@
+<form method="POST">
+    {% csrf_token %}
+    <label for="tipoUsuario">Tipo de Usuario:</label>
+    <select name="tipoUsuario" id="tipoUsuario" required>
+        <option value="">--Seleccione--</option>
+        <option value="Estudiante">Estudiante</option>
+        <option value="Profesor">Profesor</option>
+    </select>
+    
+    <div id="formulario-estudiante" style="display:none;">
+        <h3>Registro de Estudiante</h3>
+        <div>
+            {{ form.nombre.label_tag }} {{ form.nombre }}
+        </div>
+        <div>
+            {{ form.email.label_tag }} {{ form.email }}
+        </div>
+        <div>
+            {{ form.contrasena.label_tag }} {{ form.contrasena }}
+        </div>
+        <div>
+            {{ form.matricula.label_tag }} {{ form.matricula }}
+        </div>
+    </div>
+    
+    <div id="formulario-profesor" style="display:none;">
+        <h3>Registro de Profesor</h3>
+        <div>
+            {{ form.nombre.label_tag }} {{ form.nombre }}
+        </div>
+        <div>
+            {{ form.email.label_tag }} {{ form.email }}
+        </div>
+        <div>
+            {{ form.contrasena.label_tag }} {{ form.contrasena }}
+        </div>
+        <div>
+            {{ form.idProfesor.label_tag }} {{ form.idProfesor }}
+        </div>
+    </div>
+    
+    <button type="submit">Registrarse</button>
+</form>
+
+<script>
+    // JavaScript para mostrar/ocultar el formulario correspondiente según la opción seleccionada
+    document.getElementById('tipoUsuario').addEventListener('change', function() {
+        var tipoUsuario = this.value;
+        var formularioEstudiante = document.getElementById('formulario-estudiante');
+        var formularioProfesor = document.getElementById('formulario-profesor');
+        
+        if (tipoUsuario === 'Estudiante') {
+            formularioEstudiante.style.display = 'block';
+            formularioProfesor.style.display = 'none';
+        } else if (tipoUsuario === 'Profesor') {
+            formularioEstudiante.style.display = 'none';
+            formularioProfesor.style.display = 'block';
+        } else {
+            formularioEstudiante.style.display = 'none';
+            formularioProfesor.style.display = 'none';
+        }
+    });
+</script>
+
+
