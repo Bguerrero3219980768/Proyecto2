@@ -1,33 +1,36 @@
-# forms.py
-#hola
 from django import forms
-from .models import Estudiante, Profesor
+from django.contrib.auth.forms import UserCreationForm
+from .models import Curso, ContenidoCurso, CustomUser, Evaluacion
 
-class RegistroEstudianteForm(forms.ModelForm):
-    contrasena = forms.CharField(widget=forms.PasswordInput)
-
+class RegistroForm(UserCreationForm):
     class Meta:
-        model = Estudiante
-        fields = ['nombre', 'email', 'contrasena', 'matricula']
+        model = CustomUser
+        fields = ('username', 'email', 'user_type', 'password1', 'password2')
 
-    def save(self, commit=True):
-        estudiante = super().save(commit=False)
-        estudiante.set_password(self.cleaned_data['contrasena'])  # Encripta la contraseña
-        if commit:
-            estudiante.save()
-        return estudiante
+    # Opcional: validación personalizada si es necesario
+    def clean_user_type(self):
+        user_type = self.cleaned_data.get('user_type')
+        if not user_type:
+            raise forms.ValidationError('Debe seleccionar un tipo de usuario.')
+        return user_type
+    
+# Formulario de verificación de cuenta
+class VerificacionForm(forms.Form):
+    codigo_verificacion = forms.CharField(max_length=6)
 
-class RegistroProfesorForm(forms.ModelForm):
-    contrasena = forms.CharField(widget=forms.PasswordInput)
-
+class CursoForm(forms.ModelForm):
     class Meta:
-        model = Profesor
-        fields = ['nombre', 'email', 'contrasena', 'idProfesor']
+        model = Curso
+        fields = ['nombre', 'descripcion', 'profesor']
+        
+# Formulario de creación de evaluación
+class EvaluacionForm(forms.ModelForm):
+    class Meta:
+        model = Evaluacion
+        fields = ['titulo', 'fecha']
 
-    def save(self, commit=True):
-        profesor = super().save(commit=False)
-        profesor.set_password(self.cleaned_data['contrasena'])  # Encripta la contraseña
-        if commit:
-            profesor.save()
-        return profesor
+class ContenidoCursoForm(forms.ModelForm):
+    class Meta:
+        model = ContenidoCurso
+        fields = ['titulo', 'descripcion', 'archivo']
 

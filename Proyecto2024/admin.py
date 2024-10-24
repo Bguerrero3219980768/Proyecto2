@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Estudiante, Profesor, Curso, Evaluacion, Calificacion, Administrador
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
 
-admin.site.register(Estudiante)
-admin.site.register(Profesor)
-admin.site.register(Curso)
-admin.site.register(Evaluacion)
-admin.site.register(Calificacion)
-admin.site.register(Administrador)
+class CustomUserAdmin(UserAdmin):
+    list_display = ('username', 'email', 'user_type', 'is_staff')
+    list_filter = ('user_type',)
+
+admin.site.register(CustomUser, CustomUserAdmin)

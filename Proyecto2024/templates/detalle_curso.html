@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Curso</title>
+</head>
+<body>
+    <h1>Detalles del Curso: {{ curso.nombre }}</h1>
+    <p>{{ curso.descripcion }}</p>
+
+    <h2>Evaluaciones</h2>
+    <ul>
+        {% for evaluacion in evaluaciones %}
+            <li>{{ evaluacion.titulo }} - Fecha: {{ evaluacion.fecha }}</li>
+        {% empty %}
+            <li>No hay evaluaciones para este curso.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calificaciones</title>
+</head>
+<body>
+    <h1>Mis Calificaciones</h1>
+    <ul>
+        {% for calificacion in calificaciones %}
+            <li>{{ calificacion.evaluacion.titulo }}: {{ calificacion.calificacion }}</li>
+        {% empty %}
+            <li>No tienes calificaciones disponibles.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

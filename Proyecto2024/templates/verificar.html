@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro de Usuario</title>
+    <title>Verificación de Cuenta</title>
 </head>
 <body>
-    <h1>Registro de Usuario</h1>
+    <h1>Verificación de Cuenta</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Registrar</button>
+        <button type="submit">Verificar</button>
     </form>
 </body>
 </html>
