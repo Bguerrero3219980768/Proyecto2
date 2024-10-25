@@ -87,6 +87,16 @@ DATABASES = {
 
 AUTH_USER_MODEL = 'Proyecto2024.CustomUser'
 
+# Configuración del backend de correo electrónico
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Servidor SMTP de tu proveedor de correo
+EMAIL_PORT = 587  # Puerto SMTP, generalmente 587 para conexiones TLS
+EMAIL_USE_TLS = True  # Activar el protocolo de seguridad TLS
+EMAIL_HOST_USER = 'proyecto.portal2024@gmail.com'  # Dirección de correo desde la que se enviarán los emails
+EMAIL_HOST_PASSWORD = 'proyecto_clave1234'  # Contraseña de la cuenta de correo
+DEFAULT_FROM_EMAIL = 'proyecto.portal2024@gmail.com'  # Dirección predeterminada en los correos enviados
+
+
 
 
 # Password validation

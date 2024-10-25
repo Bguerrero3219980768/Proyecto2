@@ -21,9 +21,13 @@ def registro_usuario(request):
     if request.method == 'POST':
         form = RegistroForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+
             codigo_verificacion = VerificationCode.objects.create(user=user)
             codigo_verificacion.send_verification_email()
+
             return redirect('verificar_cuenta', user_id=user.id)
     else:
         form = RegistroForm()
@@ -34,11 +38,21 @@ def verificar_cuenta(request, user_id):
     user = CustomUser.objects.get(id=user_id)
     if request.method == 'POST':
         form = VerificacionForm(request.POST)
-        if form.is_valid() and form.cleaned_data['code'] == str(user.verificationcode.code):
-            user.verificationcode.verified = True
-            user.verificationcode.save()
-            login(request, user)
-            return redirect('inicio')
+        if form.is_valid():
+            codigo_ingresado = form.cleaned_data['codigo_verificacion']
+            try:
+                # Buscar el código de verificación
+                codigo_obj = VerificationCode.objects.get(user=user, code=codigo_ingresado)
+                if not codigo_obj.verified:
+                    user.is_active = True  # Activa la cuenta del usuario
+                    user.save()
+                    codigo_obj.verified = True  # Marca el código como usado
+                    codigo_obj.save()
+                    return redirect('login')
+                else:
+                    form.add_error(None, 'El código ya ha sido usado.')
+            except VerificationCode.DoesNotExist:
+                form.add_error('codigo_verificacion', 'Código incorrecto')
     else:
         form = VerificacionForm()
     return render(request, 'verificar.html', {'form': form})

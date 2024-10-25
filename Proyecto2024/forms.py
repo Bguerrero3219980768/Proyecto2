@@ -16,7 +16,7 @@ class RegistroForm(UserCreationForm):
     
 # Formulario de verificación de cuenta
 class VerificacionForm(forms.Form):
-    codigo_verificacion = forms.CharField(max_length=6)
+    codigo_verificacion = forms.UUIDField(label='Código de verificación')
 
 class CursoForm(forms.ModelForm):
     class Meta:
