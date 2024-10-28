@@ -1,6 +1,7 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.decorators import user_passes_test, login_required
 from .models import CustomUser, VerificationCode, Curso, Inscripcion, Evaluacion, Calificacion
 from .forms import RegistroForm, VerificacionForm, CursoForm, EvaluacionForm
 
@@ -22,9 +23,10 @@ def registro_usuario(request):
         form = RegistroForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False
+            user.is_active = False # Desactiva la cuenta hasta la verificación
             user.save()
-
+            
+            #Crear codigo de verificacion y enviar email
             codigo_verificacion = VerificationCode.objects.create(user=user)
             codigo_verificacion.send_verification_email()
 
@@ -56,6 +58,22 @@ def verificar_cuenta(request, user_id):
     else:
         form = VerificacionForm()
     return render(request, 'verificar.html', {'form': form})
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            return redirect('home')  # Redirige a la página principal o a otra página
+        else:
+            messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
+    return render(request, 'login.html')
+
+@login_required
+def home(request):
+    return render(request, 'home.html')
 
 # 3. Vista para que los administradores creen cursos
 @user_passes_test(es_administrador)

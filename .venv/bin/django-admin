@@ -1,4 +1,4 @@
-#!/home/daniel/proyecto/Proyecto2/.venv/bin/python3
+#!/home/daniel/proyecto/Proyecto2/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

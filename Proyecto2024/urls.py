@@ -9,11 +9,15 @@ from .views import (
     crear_evaluacion,
     ver_calificaciones,
     detalle_curso,
+    login,
+    home,
 )
 
 urlpatterns = [
     path('registro/', registro_usuario, name='registro_usuario'),
     path('verificar/<int:user_id>/', verificar_cuenta, name='verificar_cuenta'),
+    path('login/', login, name='login'),
+    path('home/', home, name='home'),
     path('crear-curso/', crear_curso, name='crear_curso'),
     path('cursos/', lista_cursos_disponibles, name='lista_cursos'),
     path('cursos/inscribirse/<int:curso_id>/', inscribirse_curso, name='inscribirse_curso'),

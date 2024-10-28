@@ -25,7 +25,9 @@ class VerificationCode(models.Model):
     def send_verification_email(self):
         subject = 'Código de verificación de registro'
         message = f'Tu código de verificación es: {self.code}'
-        send_mail(subject, message, 'proyecto.portal2024@gmail.com', [self.user.email])
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [self.user.email]
+        send_mail(subject, message, from_email, recipient_list)
 
 # Modelo de Curso
 class Curso(models.Model):
