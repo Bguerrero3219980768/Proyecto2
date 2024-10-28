@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Lista de Cursos</title>
 </head>
+
 <body>
     <h1>Cursos Disponibles</h1>
     <ul>
         {% for curso in cursos %}
-            <li>
-                {{ curso.nombre }} - 
-                <a href="{% url 'inscribirse_curso' curso.id %}">Inscribirse</a>
-            </li>
+        <li>
+            {{ curso.nombre }} -
+            <a href="{% url 'inscribirse_curso' curso.id %}">Inscribirse</a>
+        </li>
         {% endfor %}
     </ul>
 </body>
+
 </html>

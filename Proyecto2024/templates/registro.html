@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Registro de Usuario</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
-    <h1>Registro de Usuario</h1>
+    <div class="title-container">
+        <h1>Registro de Usuario</h1>
+    </div>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
