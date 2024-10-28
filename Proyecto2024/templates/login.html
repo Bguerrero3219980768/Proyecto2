@@ -1,11 +1,11 @@
-<!-- templates/login.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
-    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <h2>Iniciar sesión</h2>
@@ -24,5 +24,8 @@
         {% endif %}
         <button type="submit">Ingresar</button>
     </form>
+    <a href="{% url 'registro_usuario' %}">
+        <button type="submit">Registrarse</button>
+    </a>
 </body>
 </html>
