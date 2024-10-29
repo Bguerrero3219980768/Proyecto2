@@ -7,14 +7,55 @@
     <title>Inicio</title>
    
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f0f2f5;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .header {
+        background-color: #1a237e;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+    .section {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f8f9fa;
+    }
+    .event {
+        padding: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #1a237e;
+        background-color: #f8f9fa;
+    }
+</style>
+</head>
 <body>
-    <h1>Inicio</h1>
-    <p>¡Inicio de sesión correcto! Bienvenido, Estudiante {{ user.username }}.</p>
-<h2>NOTAS DEL ESTUDIANTE</h2>
-<P>5 4 2 3 </P>
-
-   
-
-    <!-- Aquí puedes añadir más contenido del home -->
-</body>
-</html>
+<div class="container">
+    <div class="header">
+        <h1>Inicio</h1>
+        <p>¡Inicio de sesión correcto! Bienvenido, Estudiante {{ user.username }}.</p>
+    

@@ -7,15 +7,160 @@
     <title>Inicio</title>
    
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f0f2f5;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .header {
+        background-color: #1a237e;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+    .section {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f8f9fa;
+    }
+    .event {
+        padding: 10px;
+        margin: 10px 0;
+        border-left: 4px solid #1a237e;
+        background-color: #f8f9fa;
+    }
+</style>
+</head>
 <body>
-    <h1>Inicio</h1>
-    <p>¡Inicio de sesión correcto! Bienvenido, Profesor {{ user.username }}.</p>
-    <h2>Listado de ESTUDIANTE</h2>
-    LISTA---------- <BUTton></BUTton>
-    ------------ <BUTton></BUTton>
-    ------------ <BUTTon></BUTTon>
-   
+<div class="container">
+    <div class="header">
+        <h1>Inicio</h1>
+        <p>¡Inicio de sesión correcto! Bienvenido, Profesor {{ user.username }}.</p>
+    </div>
 
-    <!-- Aquí puedes añadir más contenido del home -->
+    <div class="section">
+        <h2>Lista de Estudiantes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Asistencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>001</td>
+                    <td>Juan</td>
+                    <td>Pérez</td>
+                    <td>juan.perez@universidad.edu</td>
+                    <td>85%</td>
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td>María</td>
+                    <td>González</td>
+                    <td>maria.gonzalez@universidad.edu</td>
+                    <td>90%</td>
+                </tr>
+                <tr>
+                    <td>003</td>
+                    <td>Carlos</td>
+                    <td>Rodríguez</td>
+                    <td>carlos.rodriguez@universidad.edu</td>
+                    <td>95%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Horario de Clases</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hora</th>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>8:00 - 9:30</td>
+                    <td>Matemáticas 101</td>
+                    <td>-</td>
+                    <td>Matemáticas 101</td>
+                    <td>-</td>
+                    <td>Matemáticas 101</td>
+                </tr>
+                <tr>
+                    <td>10:00 - 11:30</td>
+                    <td>-</td>
+                    <td>Cálculo I</td>
+                    <td>-</td>
+                    <td>Cálculo I</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>12:00 - 13:30</td>
+                    <td>Álgebra</td>
+                    <td>-</td>
+                    <td>Álgebra</td>
+                    <td>-</td>
+                    <td>Álgebra</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Eventos Universitarios</h2>
+        <div class="event">
+            <h3>Semana de la Ciencia</h3>
+            <p>Fecha: 15 de Noviembre, 2024</p>
+            <p>Lugar: Auditorio Principal</p>
+            <p>Descripción: Presentaciones de proyectos científicos de estudiantes y profesores.</p>
+        </div>
+        <div class="event">
+            <h3>Conferencia de Matemáticas Aplicadas</h3>
+            <p>Fecha: 20 de Noviembre, 2024</p>
+            <p>Lugar: Sala de Conferencias A</p>
+            <p>Descripción: Expertos internacionales compartirán las últimas tendencias en matemáticas aplicadas.</p>
+        </div>
+        <div class="event">
+            <h3>Jornada de Innovación Educativa</h3>
+            <p>Fecha: 25 de Noviembre, 2024</p>
+            <p>Lugar: Centro de Convenciones</p>
+            <p>Descripción: Talleres y conferencias sobre nuevas metodologías de enseñanza.</p>
+        </div>
+    </div>
+</div>
 </body>
 </html>
