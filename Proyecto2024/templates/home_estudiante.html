@@ -5,52 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-   
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #f0f2f5;
-    }
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    .header {
-        background-color: #1a237e;
-        color: white;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    }
-    .section {
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-    }
-    th, td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-    th {
-        background-color: #f8f9fa;
-    }
-    .event {
-        padding: 10px;
-        margin: 10px 0;
-        border-left: 4px solid #1a237e;
-        background-color: #f8f9fa;
-    }
 </style>
 </head>
 <body>
@@ -58,4 +15,55 @@
     <div class="header">
         <h1>Inicio</h1>
         <p>¡Inicio de sesión correcto! Bienvenido, Estudiante {{ user.username }}.</p>
-    
+    </div>
+    <!-- Sección de Perfil -->
+    <div class="section">
+        <h2>Perfil</h2>
+        <p><strong>Nombre:</strong> [Nombre del Estudiante]</p>
+        <p><strong>Email:</strong> [Correo Electrónico]</p>
+        <p><strong>Carrera:</strong> [Nombre de la Carrera]</p>
+    </div>
+
+    <!-- Sección de Notas -->
+    <div class="section">
+        <h2>Notas</h2>
+        <table>
+            <tr>
+                <th>Curso</th>
+                <th>Nota</th>
+                <th>Fecha</th>
+            </tr>
+            <tr>
+                <td>Matemáticas</td>
+                <td>90</td>
+                <td>01/10/2024</td>
+            </tr>
+            <tr>
+                <td>Historia</td>
+                <td>85</td>
+                <td>02/10/2024</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Sección de Notificaciones -->
+    <div class="section">
+        <h2>Notificaciones</h2>
+        <div class="event">
+            <p><strong>05/10/2024:</strong> Inscripción abierta para el próximo semestre.</p>
+        </div>
+        <div class="event">
+            <p><strong>01/10/2024:</strong> Recuerda entregar el proyecto final de Ciencias.</p>
+        </div>
+    </div>
+
+    <!-- Sección de Cursos Disponibles -->
+    <div class="section">
+        <h2>Cursos Disponibles</h2>
+        <ul>
+            <li>Programación Avanzada</li>
+            <li>Inglés Técnico</li>
+            <li>Electrónica Básica</li>
+        </ul>
+    </div>
+</div>
