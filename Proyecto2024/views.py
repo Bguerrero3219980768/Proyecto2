@@ -23,10 +23,10 @@ def registro_usuario(request):
         form = RegistroForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.is_active = False # Desactiva la cuenta hasta la verificación
+            user.is_active = False  # Desactiva la cuenta hasta la verificación
             user.save()
-            
-            #Crear codigo de verificacion y enviar email
+
+            # Crear código de verificación y enviar email
             codigo_verificacion = VerificationCode.objects.create(user=user)
             codigo_verificacion.send_verification_email()
 
@@ -59,6 +59,7 @@ def verificar_cuenta(request, user_id):
         form = VerificacionForm()
     return render(request, 'verificar.html', {'form': form})
 
+# 3. Vista de login con opciones para estudiante y profesor
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -66,16 +67,25 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect('home')  # Redirige a la página principal o a otra página
+            if user.user_type == 'student':
+                return redirect('home_estudiante')  # Redirigir a la página del estudiante
+            elif user.user_type == 'teacher':
+                return redirect('home_profesor')  # Redirigir a la página del profesor
+            else:
+                return redirect('home')  # Redirigir a la página principal para otros tipos
         else:
             messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
     return render(request, 'login.html')
 
 @login_required
-def home(request):
-    return render(request, 'home.html')
+def home_estudiante(request):
+    return render(request, 'home_estudiante.html')
 
-# 3. Vista para que los administradores creen cursos
+@login_required
+def home_profesor(request):
+    return render(request, 'home_profesor.html')
+
+# 4. Vista para que los administradores creen cursos
 @user_passes_test(es_administrador)
 def crear_curso(request):
     if request.method == 'POST':
@@ -87,13 +97,13 @@ def crear_curso(request):
         form = CursoForm()
     return render(request, 'crear_curso.html', {'form': form})
 
-# 4. Vista para listar los cursos disponibles a los que los estudiantes pueden inscribirse
+# 5. Vista para listar los cursos disponibles a los que los estudiantes pueden inscribirse
 @user_passes_test(es_estudiante)
 def lista_cursos_disponibles(request):
     cursos = Curso.objects.all()
     return render(request, 'lista_cursos.html', {'cursos': cursos})
 
-# 5. Vista para que los estudiantes se inscriban en un curso
+# 6. Vista para que los estudiantes se inscriban en un curso
 @user_passes_test(es_estudiante)
 def inscribirse_curso(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
@@ -101,7 +111,7 @@ def inscribirse_curso(request, curso_id):
         Inscripcion.objects.create(estudiante=request.user, curso=curso)
     return redirect('detalle_curso', curso_id=curso.id)
 
-# 6. Vista para que los profesores creen evaluaciones para los cursos a los que están asignados
+# 7. Vista para que los profesores creen evaluaciones para los cursos a los que están asignados
 @user_passes_test(es_profesor)
 def crear_evaluacion(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
@@ -119,13 +129,13 @@ def crear_evaluacion(request, curso_id):
         form = EvaluacionForm()
     return render(request, 'crear_evaluacion.html', {'form': form, 'curso': curso})
 
-# 7. Vista para que los estudiantes vean sus calificaciones
+# 8. Vista para que los estudiantes vean sus calificaciones
 @user_passes_test(es_estudiante)
 def ver_calificaciones(request):
     calificaciones = Calificacion.objects.filter(estudiante=request.user)
     return render(request, 'ver_calificaciones.html', {'calificaciones': calificaciones})
 
-# 8. Vista para ver los detalles de un curso (tanto estudiantes como profesores)
+# 9. Vista para ver los detalles de un curso (tanto estudiantes como profesores)
 def detalle_curso(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
     evaluaciones = Evaluacion.objects.filter(curso=curso)
@@ -134,5 +144,3 @@ def detalle_curso(request, curso_id):
         'evaluaciones': evaluaciones,
     }
     return render(request, 'detalle_curso.html', context)
-
-
