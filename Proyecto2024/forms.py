@@ -13,7 +13,7 @@ class RegistroForm(UserCreationForm):
         if not user_type:
             raise forms.ValidationError('Debe seleccionar un tipo de usuario.')
         return user_type
-    
+
 # Formulario de verificación de cuenta
 class VerificacionForm(forms.Form):
     codigo_verificacion = forms.UUIDField(label='Código de verificación')
@@ -22,7 +22,7 @@ class CursoForm(forms.ModelForm):
     class Meta:
         model = Curso
         fields = ['nombre', 'descripcion', 'profesor']
-        
+
 # Formulario de creación de evaluación
 class EvaluacionForm(forms.ModelForm):
     class Meta:
@@ -34,3 +34,6 @@ class ContenidoCursoForm(forms.ModelForm):
         model = ContenidoCurso
         fields = ['titulo', 'descripcion', 'archivo']
 
+# Formulario de recuperación de clave
+class RecuperarClaveForm(forms.Form):
+    email = forms.EmailField(label='Correo electrónico', max_length=254)

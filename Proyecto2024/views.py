@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import user_passes_test, login_required
 from .models import CustomUser, VerificationCode, Curso, Inscripcion, Evaluacion, Calificacion
-from .forms import RegistroForm, VerificacionForm, CursoForm, EvaluacionForm
+from .forms import RegistroForm, VerificacionForm, CursoForm, EvaluacionForm, RecuperarClaveForm  # Asegúrate de importar tu nuevo formulario
 
 # Función para verificar si el usuario es administrador
 def es_administrador(user):
@@ -144,3 +144,34 @@ def detalle_curso(request, curso_id):
         'evaluaciones': evaluaciones,
     }
     return render(request, 'detalle_curso.html', context)
+
+# 10. Vista para recuperar la clave
+def recuperar_clave(request):
+    if request.method == 'POST':
+        form = RecuperarClaveForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            try:
+                user = CustomUser.objects.get(email=email)
+                # Aquí deberías enviar un correo electrónico con instrucciones para restablecer la contraseña
+                # Puedes implementar una lógica similar a la de la verificación
+                messages.success(request, 'Se han enviado instrucciones a tu correo electrónico para recuperar tu clave.')
+                return redirect('login')
+            except CustomUser.DoesNotExist:
+                messages.error(request, 'No existe un usuario con este correo electrónico.')
+    else:
+        form = RecuperarClaveForm()
+    return render(request, 'recuperar_clave.html', {'form': form})
+# Vista para manejar la recuperación de contraseña
+def recuperar_clave(request):
+    if request.method == 'POST':
+        form = RecuperarClaveForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            # Aquí iría la lógica para enviar un correo de recuperación
+            messages.success(request, 'Se ha enviado un correo con instrucciones para recuperar tu clave.')
+            return redirect('login')  # Redirige al usuario a la página de login
+    else:
+        form = RecuperarClaveForm()
+    
+    return render(request, 'recuperar_clave.html', {'form': form})

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar clave</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="recover-box">
+            <h1>Recuperar clave</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Enviar instrucciones</button>
+            </form>
+            <p>Después de enviar, revisa tu correo para las instrucciones de recuperación.</p>
+            <a href="{% url 'login' %}">Volver a iniciar sesión</a>
+        </div>
+    </div>
+</body>
+</html>
