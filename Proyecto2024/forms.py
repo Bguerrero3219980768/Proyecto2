@@ -36,4 +36,4 @@ class ContenidoCursoForm(forms.ModelForm):
 
 # Formulario de recuperación de clave
 class RecuperarClaveForm(forms.Form):
-    email = forms.EmailField(label='Correo electrónico', max_length=254)
+    email = forms.EmailField(label='Correo electrónico', required=True)

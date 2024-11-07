@@ -1,7 +1,11 @@
+import string
+import random
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, get_user_model
 from django.contrib.auth.decorators import user_passes_test, login_required
+from django.conf import settings
+from django.core.mail import send_mail
 from .models import CustomUser, VerificationCode, Curso, Inscripcion, Evaluacion, Calificacion
 from .forms import RegistroForm, VerificacionForm, CursoForm, EvaluacionForm, RecuperarClaveForm  # Asegúrate de importar tu nuevo formulario
 
@@ -145,6 +149,8 @@ def detalle_curso(request, curso_id):
     }
     return render(request, 'detalle_curso.html', context)
 
+User = get_user_model()
+
 # 10. Vista para recuperar la clave
 def recuperar_clave(request):
     if request.method == 'POST':
@@ -152,26 +158,27 @@ def recuperar_clave(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             try:
-                user = CustomUser.objects.get(email=email)
-                # Aquí deberías enviar un correo electrónico con instrucciones para restablecer la contraseña
-                # Puedes implementar una lógica similar a la de la verificación
-                messages.success(request, 'Se han enviado instrucciones a tu correo electrónico para recuperar tu clave.')
-                return redirect('login')
-            except CustomUser.DoesNotExist:
-                messages.error(request, 'No existe un usuario con este correo electrónico.')
+                usuario = User.objects.get(email=email)
+                password_temporal = generar_password_temporal()
+                
+                # Establecer la contraseña temporal
+                usuario.set_password(password_temporal)
+                usuario.save()
+
+                # Enviar el correo con la contraseña temporal
+                subject = 'Recuperación de Contraseña'
+                message = f'Tu nueva contraseña temporal es: {password_temporal}. Te recomendamos cambiarla después de iniciar sesión.'
+                from_email = settings.DEFAULT_FROM_EMAIL
+                send_mail(subject, message, from_email, [email])
+
+                messages.success(request, 'Se ha enviado una contraseña temporal a tu correo electrónico.')
+            except User.DoesNotExist:
+                form.add_error('email', 'No existe una cuenta asociada a este correo.')
     else:
         form = RecuperarClaveForm()
     return render(request, 'recuperar_clave.html', {'form': form})
-# Vista para manejar la recuperación de contraseña
-def recuperar_clave(request):
-    if request.method == 'POST':
-        form = RecuperarClaveForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            # Aquí iría la lógica para enviar un correo de recuperación
-            messages.success(request, 'Se ha enviado un correo con instrucciones para recuperar tu clave.')
-            return redirect('login')  # Redirige al usuario a la página de login
-    else:
-        form = RecuperarClaveForm()
-    
-    return render(request, 'recuperar_clave.html', {'form': form})
+
+def generar_password_temporal():
+    caracteres = string.ascii_letters + string.digits
+    password = ''.join(random.choice(caracteres) for _ in range(10))  # Genera una contraseña de 10 caracteres
+    return password
