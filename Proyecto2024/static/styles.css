@@ -81,7 +81,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #005ea3;
+    background-color: #a9a9a9;
 }
 
 button[type="button"] {
@@ -94,7 +94,7 @@ button[type="button"] {
 }
 
 button[type="button"]:hover {
-    background-color: #5a6268;
+    background-color: #a9a9a9;
 }
 
 p {
