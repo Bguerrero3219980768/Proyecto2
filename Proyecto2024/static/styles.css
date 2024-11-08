@@ -7,11 +7,16 @@
 }
 
 body {
-    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url(images/fondooo.jpg);
+    background-size: cover; /* La imagen cubrirá todo el fondo */
+    background-position: center; /* Centrar la imagen */
+    background-repeat: no-repeat; /* Evitar que se repita */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 /* Contenedor principal */
@@ -20,24 +25,26 @@ body {
     max-width: 400px;
     margin: 20px;
     padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #a80808; /* Cambia el fondo a rojo */
+    box-shadow: 0 0 10px rgb(137, 4, 4);
     border-radius: 8px;
-}
-
-/* Contenedor específico para la página de registro */
-.registro-container {
-    max-width: 500px;
-    /* Aumenta el ancho máximo del contenedor */
 }
 
 /* Títulos */
 .title-container h1 {
     font-size: 24px;
     font-weight: bold;
-    color: #333333;
+    color: #ffffff; /* Cambia el color del texto a blanco */
     text-align: center;
     margin-bottom: 20px;
+}
+
+/* Nuevo texto debajo del título */
+.title-container p {
+    font-size: 16px;
+    color: #ffffff; /* Cambia el color del texto a blanco */
+    text-align: center;
+    margin-top: 5px;
 }
 
 /* Formularios */
@@ -48,7 +55,7 @@ form div {
 label {
     display: block;
     font-weight: bold;
-    color: #333333;
+    color: #ffffff; /* Cambia el color del texto a blanco */
     margin-bottom: 5px;
 }
 
@@ -62,11 +69,11 @@ button {
     border: 1px solid #dddddd;
     border-radius: 5px;
     font-size: 16px;
-    color: #333333;
+    color: #000000; /* Cambia el color del texto a blanco */
 }
 
 button[type="submit"] {
-    background-color: #0078d4;
+    background-color: #dd4b39;
     color: #ffffff;
     border: none;
     cursor: pointer;
@@ -78,7 +85,7 @@ button[type="submit"]:hover {
 }
 
 button[type="button"] {
-    background-color: #6c757d;
+    background-color: #dd4b39;
     color: #ffffff;
     border: none;
     cursor: pointer;
@@ -91,7 +98,7 @@ button[type="button"]:hover {
 }
 
 p {
-    color: #333333;
+    color: #ffffff; /* Cambia el color del texto a blanco */
     text-align: center;
 }
 
@@ -101,6 +108,7 @@ a {
     display: block;
     text-align: center;
     margin-top: 10px;
+    color: #ffffff; /* Cambia el color del enlace a blanco */
 }
 
 .recover-box {
