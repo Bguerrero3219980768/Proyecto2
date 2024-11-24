@@ -55,14 +55,31 @@
             <p><strong>01/10/2024:</strong> Recuerda entregar el proyecto final de Ciencias.</p>
         </div>
     </div>
-
     <!-- Sección de Cursos Disponibles -->
     <div class="section">
         <h2>Cursos Disponibles</h2>
-        <ul>
-            <li>Programación Avanzada</li>
-            <li>Inglés Técnico</li>
-            <li>Electrónica Básica</li>
-        </ul>
+        <div class="dropdown">
+            <button>Inscripción de cursos</button>
+            <div class="dropdown-content">
+                <ul>
+                    <li>Programación Avanzada</li>
+                    <li>Inglés Técnico</li>
+                    <li>Electrónica Básica</li> 
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+    // Si prefieres manejar el despliegue con JS en lugar de CSS hover:
+    const dropdownButton = document.querySelector('.dropdown button');
+    const dropdownContent = document.querySelector('.dropdown-content');
+
+    dropdownButton.addEventListener('click', () => {
+        const isHidden = dropdownContent.style.display === 'none' || dropdownContent.style.display === '';
+        dropdownContent.style.display = isHidden ? 'block' : 'none';
+    });
+</script>
+</body>
+</html>
