@@ -1,6 +1,7 @@
 <!-- templates/home.html -->
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,76 +11,80 @@
 </head>
 </style>
 </head>
+
 <body>
-<div class="container">
-    <div class="header">
-        <h1>Inicio</h1>
-        <p>¡Inicio de sesión correcto! Bienvenido, Estudiante {{ user.username }}.</p>
-    </div>
-    <!-- Sección de Perfil -->
-    <div class="section">
-        <h2>Perfil</h2>
-        <p><strong>Nombre:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-    </div>
-
-    <!-- Sección de Notas -->
-    <div class="section">
-        <h2>Notas</h2>
-        <table>
-            <tr>
-                <th>Curso</th>
-                <th>Nota</th>
-                <th>Fecha</th>
-            </tr>
-            <tr>
-                <td>Matemáticas</td>
-                <td>90</td>
-                <td>01/10/2024</td>
-            </tr>
-            <tr>
-                <td>Historia</td>
-                <td>85</td>
-                <td>02/10/2024</td>
-            </tr>
-        </table>
-    </div>
-
-    <!-- Sección de Notificaciones -->
-    <div class="section">
-        <h2>Notificaciones</h2>
-        <div class="event">
-            <p><strong>05/10/2024:</strong> Inscripción abierta para el próximo semestre.</p>
+    <div class="container">
+        <div class="header">
+            <h1>Inicio</h1>
+            <p>¡Inicio de sesión correcto! Bienvenido, Estudiante {{ user.username }}.</p>
         </div>
-        <div class="event">
-            <p><strong>01/10/2024:</strong> Recuerda entregar el proyecto final de Ciencias.</p>
+        <!-- Sección de Perfil -->
+        <div class="section">
+            <h2>Perfil</h2>
+            <p><strong>Nombre:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
         </div>
-    </div>
-    <!-- Sección de Cursos Disponibles -->
-    <div class="section">
-        <h2>Cursos Disponibles</h2>
-        <div class="dropdown">
-            <button>Inscripción de cursos</button>
-            <div class="dropdown-content">
-                <ul>
-                    <li>Programación Avanzada</li>
-                    <li>Inglés Técnico</li>
-                    <li>Electrónica Básica</li> 
-                </ul>
+
+        <!-- Sección de Notas -->
+        <div class="section">
+            <h2>Notas</h2>
+            <table>
+                <tr>
+                    <th>Curso</th>
+                    <th>Nota</th>
+                    <th>Fecha</th>
+                </tr>
+                <tr>
+                    <td>Matemáticas</td>
+                    <td>90</td>
+                    <td>01/10/2024</td>
+                </tr>
+                <tr>
+                    <td>Historia</td>
+                    <td>85</td>
+                    <td>02/10/2024</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Sección de Notificaciones -->
+        <div class="section">
+            <h2>Notificaciones</h2>
+            <div class="event">
+                <p><strong>05/10/2024:</strong> Inscripción abierta para el próximo semestre.</p>
+            </div>
+            <div class="event">
+                <p><strong>01/10/2024:</strong> Recuerda entregar el proyecto final de Ciencias.</p>
+            </div>
+        </div>
+        <!-- Sección de Cursos Disponibles -->
+        <div class="section">
+            <h2>Cursos Disponibles</h2>
+            <div class="dropdown">
+                <a href="{% url 'lista_cursos' %}">
+                    <button>Inscripción de cursos</button>
+                </a>
+                <div class="dropdown-content">
+                    <ul>
+                        <li>Programación Avanzada</li>
+                        <li>Inglés Técnico</li>
+                        <li>Electrónica Básica</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    // Si prefieres manejar el despliegue con JS en lugar de CSS hover:
-    const dropdownButton = document.querySelector('.dropdown button');
-    const dropdownContent = document.querySelector('.dropdown-content');
+    <script>
+        // Si prefieres manejar el despliegue con JS en lugar de CSS hover:
+        const dropdownButton = document.querySelector('.dropdown button');
+        const dropdownContent = document.querySelector('.dropdown-content');
 
-    dropdownButton.addEventListener('click', () => {
-        const isHidden = dropdownContent.style.display === 'none' || dropdownContent.style.display === '';
-        dropdownContent.style.display = isHidden ? 'block' : 'none';
-    });
-</script>
+        dropdownButton.addEventListener('click', () => {
+            const isHidden = dropdownContent.style.display === 'none' || dropdownContent.style.display === '';
+            dropdownContent.style.display = isHidden ? 'block' : 'none';
+        });
+    </script>
 </body>
+
 </html>
