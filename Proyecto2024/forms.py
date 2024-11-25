@@ -27,7 +27,7 @@ class CursoForm(forms.ModelForm):
 class EvaluacionForm(forms.ModelForm):
     class Meta:
         model = Evaluacion
-        fields = ['titulo', 'fecha']
+        fields = ['titulo', 'descripcion', 'fecha']
 
 class ContenidoCursoForm(forms.ModelForm):
     class Meta:

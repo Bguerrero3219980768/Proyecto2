@@ -121,13 +121,21 @@
 
     <!-- Nueva sección de "Cursos" -->
     <div class="section">
-        <h2>Cursos</h2>
-        <p>En esta sección puedes crear nuevos cursos para tus estudiantes.</p>
+        <h2>Mis Cursos</h2>
+        <p>En esta sección puedes gestionar tus cursos asignados</p>
+        {% if cursos %}
+        <ul>
+            {% for curso in cursos %}
+            <li>
+                <strong>{{ curso.nombre }}</strong> - {{ curso.descripcion }}
+                <a href="{% url 'detalle_curso' curso.id %}">Ver detalles</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No tienes cursos asignados actualmente.</p>
+        {% endif %}
         
-        <!-- Botón que redirige a la página de crear curso -->
-        <a href="{% url 'crear_curso.html' %}">
-            <button>Crear Nuevo Curso</button>
-        </a>
     </div>
 </div>
 </body>

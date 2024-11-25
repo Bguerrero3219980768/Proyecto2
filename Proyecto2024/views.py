@@ -91,9 +91,11 @@ def home_estudiante(request):
 
 @login_required
 def home_profesor(request):
-    return render(request, 'home_profesor.html')
+     # Filtrar los cursos asignados al profesor actual
+    cursos = Curso.objects.filter(profesor=request.user)
+    return render(request, 'home_profesor.html', {'cursos': cursos})
 
-# 4. Vista para que los administradores creen cursos
+# 4. Vista para que los administradores creen cursos1
 @user_passes_test(es_administrador)
 def crear_curso(request):
     if request.method == 'POST':

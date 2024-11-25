@@ -8,13 +8,18 @@
     <h1>Detalles del Curso: {{ curso.nombre }}</h1>
     <p>{{ curso.descripcion }}</p>
 
-    <h2>Evaluaciones</h2>
-    <ul>
-        {% for evaluacion in evaluaciones %}
-            <li>{{ evaluacion.titulo }} - Fecha: {{ evaluacion.fecha }}</li>
-        {% empty %}
-            <li>No hay evaluaciones para este curso.</li>
-        {% endfor %}
-    </ul>
+    <div class="section">
+        <h2>Evaluaciones</h2>
+        {% if curso.evaluacion_set.all %}
+            <ul>
+                {% for evaluacion in curso.evaluacion_set.all %}
+                    <li>{{ evaluacion.titulo }} - {{ evaluacion.fecha }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay evaluaciones para este curso.</p>
+        {% endif %}
+        <a href="{% url 'crear_evaluacion' curso.id %}">Crear Nueva Evaluación</a>
+    </div>
 </body>
 </html>
