@@ -2,7 +2,7 @@ import string
 import random
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login as auth_login, get_user_model
+from django.contrib.auth import authenticate, login as auth_login, get_user_model, logout as auth_logout
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.conf import settings
 from django.core.mail import send_mail
@@ -80,6 +80,10 @@ def login(request):
         else:
             messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
     return render(request, 'login.html')
+@login_required
+def logout(request):
+    auth_logout(request)
+    return redirect('login')  # Redirige al login después de cerrar sesión
 
 @login_required
 def home_estudiante(request):

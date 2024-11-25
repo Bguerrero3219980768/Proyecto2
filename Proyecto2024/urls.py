@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import (
     login,
+    logout,
     registro_usuario,
     verificar_cuenta,
     home_estudiante,
@@ -16,6 +17,7 @@ from .views import (
 
 urlpatterns = [
     path('login/', login, name='login'),
+    path('logout/', logout, name="logout"),
     path('recuperar-clave/', recuperar_clave, name='recuperar_clave'),
     path('registro/', registro_usuario, name='registro_usuario'),
     path('verificar/<int:user_id>/', verificar_cuenta, name='verificar_cuenta'),

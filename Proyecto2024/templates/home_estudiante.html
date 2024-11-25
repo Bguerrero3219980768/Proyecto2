@@ -15,7 +15,11 @@
 <body>
     <div class="container">
         <div class="header">
+            <a href="{% url 'logout' %}">
+                <button>Cerrar sesión</button>
+            </a>
             <h1>Inicio</h1>
+             
             <p>¡Inicio de sesión correcto! Bienvenido, Estudiante {{ user.username }}.</p>
         </div>
         <!-- Sección de Perfil -->
@@ -23,6 +27,7 @@
             <h2>Perfil</h2>
             <p><strong>Nombre:</strong> {{ user.username }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
+           
         </div>
 
         <!-- Sección de Notas -->

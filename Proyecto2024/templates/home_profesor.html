@@ -10,6 +10,9 @@
 <body>
 <div class="container">
     <div class="header">
+        <a href="{% url 'logout' %}">
+            <button>Cerrar sesión</button>
+        </a>
         <h1>Inicio</h1>
         <p>¡Inicio de sesión correcto! Bienvenido, Profesor {{ user.username }}.</p>
     </div>
