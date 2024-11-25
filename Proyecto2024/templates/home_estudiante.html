@@ -62,6 +62,26 @@
                 <p><strong>01/10/2024:</strong> Recuerda entregar el proyecto final de Ciencias.</p>
             </div>
         </div>
+        <!-- Nueva sección de "Cursos" -->
+        <div class="section">
+            <h2>Mis Cursos</h2>
+            {% if inscripciones %}
+                <ul>
+                    {% for inscripcion in inscripciones %}
+                        <li>
+                            <strong>Curso:</strong> {{ inscripcion.curso.nombre }} <br>
+                            <strong>Descripción:</strong> {{ inscripcion.curso.descripcion }} <br>
+                            <strong>Profesor:</strong> {{ inscripcion.curso.profesor.username }} <br>
+                            <strong>Fecha de inscripción:</strong> {{ inscripcion.fecha_inscripcion }} <br>
+                            <a href="{% url 'detalle_curso_estudiante' inscripcion.curso.id %}">Ver detalles del curso</a>
+                        </li>
+                        <hr>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No estás inscrito en ningún curso.</p>
+            {% endif %}
+        </div>
         <!-- Sección de Cursos Disponibles -->
         <div class="section">
             <h2>Cursos Disponibles</h2>

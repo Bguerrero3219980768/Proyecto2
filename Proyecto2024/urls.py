@@ -12,6 +12,7 @@ from .views import (
     crear_evaluacion,
     ver_calificaciones,
     detalle_curso,
+    detalle_curso_estudiante,
     recuperar_clave,  # Asegúrate de importar la vista
 )
 
@@ -29,5 +30,6 @@ urlpatterns = [
     path('crear-evaluacion/<int:curso_id>/', crear_evaluacion, name='crear_evaluacion'),
     path('calificaciones/', ver_calificaciones, name='ver_calificaciones'),
     path('curso/<int:curso_id>/', detalle_curso, name='detalle_curso'),
+    path('detalle-curso/<int:curso_id>/', detalle_curso_estudiante, name='detalle_curso_estudiante'),
     path('recuperar-clave/', recuperar_clave, name='recuperar_clave'),  # Nueva URL para recuperar clave
 ]

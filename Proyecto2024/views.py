@@ -87,7 +87,10 @@ def logout(request):
 
 @login_required
 def home_estudiante(request):
-    return render(request, 'home_estudiante.html')
+    # Obtener las inscripciones del estudiante
+    inscripciones = Inscripcion.objects.filter(estudiante=request.user)
+    
+    return render(request, 'home_estudiante.html', {'user': request.user, 'inscripciones': inscripciones})
 
 @login_required
 def home_profesor(request):
@@ -119,7 +122,7 @@ def inscribirse_curso(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
     if not Inscripcion.objects.filter(estudiante=request.user, curso=curso).exists():
         Inscripcion.objects.create(estudiante=request.user, curso=curso)
-    return redirect('detalle_curso', curso_id=curso.id)
+    return redirect('detalle_curso_estudiante', curso_id=curso.id)
 
 # 7. Vista para que los profesores creen evaluaciones para los cursos a los que están asignados
 @user_passes_test(es_profesor)
@@ -154,6 +157,17 @@ def detalle_curso(request, curso_id):
         'evaluaciones': evaluaciones,
     }
     return render(request, 'detalle_curso.html', context)
+
+@login_required
+def detalle_curso_estudiante(request, curso_id):
+    # Verificar que el curso pertenece al estudiante
+    curso = get_object_or_404(Curso, id=curso_id)
+    inscripcion = Inscripcion.objects.filter(estudiante=request.user, curso=curso).exists()
+
+    if not inscripcion:
+        return redirect('home_estudiante')  # Redirige si no está inscrito en el curso
+
+    return render(request, 'detalle_curso_estudiante.html', {'curso': curso})
 
 User = get_user_model()
 
