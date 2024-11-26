@@ -37,3 +37,11 @@ class ContenidoCursoForm(forms.ModelForm):
 # Formulario de recuperación de clave
 class RecuperarClaveForm(forms.Form):
     email = forms.EmailField(label='Correo electrónico', required=True)
+    
+class EditarPerfilForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['foto_perfil', 'telefono', 'correo_alternativo', 'email']
+        widgets = {
+            'email': forms.EmailInput(attrs={'readonly': 'readonly'}),
+        }

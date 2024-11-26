@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 from django.conf import settings
 from django.core.mail import send_mail
 from .models import CustomUser, VerificationCode, Curso, Inscripcion, Evaluacion, Calificacion
-from .forms import RegistroForm, VerificacionForm, CursoForm, EvaluacionForm, RecuperarClaveForm  # Asegúrate de importar tu nuevo formulario
+from .forms import RegistroForm, VerificacionForm, CursoForm, EvaluacionForm, RecuperarClaveForm, EditarPerfilForm  # Asegúrate de importar tu nuevo formulario
 
 # Función para verificar si el usuario es administrador
 def es_administrador(user):
@@ -202,3 +202,15 @@ def generar_password_temporal():
     caracteres = string.ascii_letters + string.digits
     password = ''.join(random.choice(caracteres) for _ in range(10))  # Genera una contraseña de 10 caracteres
     return password
+
+@login_required
+def editar_perfil(request):
+    if request.method == 'POST':
+        form = EditarPerfilForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('home_estudiante')  # Redirige a la página de inicio del estudiante
+    else:
+        form = EditarPerfilForm(instance=request.user)
+
+    return render(request, 'editar_perfil.html', {'form': form})

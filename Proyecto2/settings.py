@@ -141,3 +141,8 @@ STATICFILES_DIRS = [BASE_DIR / "Proyecto2024" / "static"]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+import os
+# Directorio para archivos de medios (imágenes, archivos subidos)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -12,6 +12,9 @@ class CustomUser(AbstractUser):
         ('teacher', 'Profesor'),
     )
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
+    foto_perfil = models.ImageField(upload_to='fotos_perfil/', blank=True, null=True)
+    telefono = models.CharField(max_length=15, blank=True, null=True)
+    correo_alternativo = models.EmailField(blank=True, null=True)
 
     def __str__(self):
         return self.username

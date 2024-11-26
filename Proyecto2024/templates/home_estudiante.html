@@ -24,10 +24,23 @@
         </div>
         <!-- Sección de Perfil -->
         <div class="section">
+            <a href="{% url 'editar_perfil' %}">
+                <button>Editar Perfil</button>
+            </a>
             <h2>Perfil</h2>
+            <p><strong>Foto de Perfil:</strong></p>
+            {% if user.foto_perfil %}
+                <img src="{{ user.foto_perfil.url }}" alt="Foto de Perfil" width="100">
+            {% else %}
+                <p>No hay foto de perfil.</p>
+            {% endif %}
             <p><strong>Nombre:</strong> {{ user.username }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
-           
+            <p><strong>Teléfono:</strong> {{ user.telefono|default:"No registrado" }}</p>
+            <p><strong>Correo Alternativo:</strong> {{ user.correo_alternativo|default:"No registrado" }}</p>
+            
+            
+            
         </div>
 
         <!-- Sección de Notas -->
