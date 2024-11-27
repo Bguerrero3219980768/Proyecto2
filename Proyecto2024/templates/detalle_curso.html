@@ -20,6 +20,8 @@
             <p>No hay evaluaciones para este curso.</p>
         {% endif %}
         <a href="{% url 'crear_evaluacion' curso.id %}">Crear Nueva Evaluación</a>
+        <br>
+        <a href="{% url 'asignar_calificacion' curso.id %}">Asignar Calificaciones</a>
     </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Curso, ContenidoCurso, CustomUser, Evaluacion
+from django.core.exceptions import ValidationError
+from .models import Curso, ContenidoCurso, CustomUser, Evaluacion, Calificacion, Inscripcion
 
 class RegistroForm(UserCreationForm):
     class Meta:
@@ -28,6 +29,31 @@ class EvaluacionForm(forms.ModelForm):
     class Meta:
         model = Evaluacion
         fields = ['titulo', 'descripcion', 'fecha']
+        
+class CalificacionForm(forms.ModelForm):
+    class Meta:
+        model = Calificacion
+        fields = ['estudiante', 'evaluacion', 'calificacion']
+        widgets = {
+            'calificacion': forms.NumberInput(attrs={'min': 0, 'max': 5, 'step': 0.1}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        profesor = kwargs.pop('profesor')
+        super().__init__(*args, **kwargs)
+        # Filtrar las evaluaciones para que sean solo del profesor autenticado
+        self.fields['evaluacion'].queryset = Evaluacion.objects.filter(curso__profesor=profesor)
+
+        # Filtrar los estudiantes inscritos en el curso relacionado con la evaluación seleccionada
+        self.fields['estudiante'].queryset = CustomUser.objects.filter(
+            id__in=Inscripcion.objects.filter(curso__profesor=profesor).values('estudiante')
+        )
+        
+    def clean_calificacion(self):
+        calificacion = self.cleaned_data.get('calificacion')
+        if calificacion < 0 or calificacion > 5:
+            raise ValidationError('La calificación debe estar entre 0 y 5.')
+        return calificacion
 
 class ContenidoCursoForm(forms.ModelForm):
     class Meta:

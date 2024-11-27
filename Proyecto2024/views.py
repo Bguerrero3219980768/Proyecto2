@@ -4,10 +4,11 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, get_user_model, logout as auth_logout
 from django.contrib.auth.decorators import user_passes_test, login_required
+from django.http import HttpResponseForbidden
 from django.conf import settings
 from django.core.mail import send_mail
 from .models import CustomUser, VerificationCode, Curso, Inscripcion, Evaluacion, Calificacion
-from .forms import RegistroForm, VerificacionForm, CursoForm, EvaluacionForm, RecuperarClaveForm, EditarPerfilForm  # Asegúrate de importar tu nuevo formulario
+from .forms import RegistroForm, VerificacionForm, CursoForm, EvaluacionForm, RecuperarClaveForm, EditarPerfilForm, CalificacionForm  # Asegúrate de importar tu nuevo formulario
 
 # Función para verificar si el usuario es administrador
 def es_administrador(user):
@@ -214,3 +215,21 @@ def editar_perfil(request):
         form = EditarPerfilForm(instance=request.user)
 
     return render(request, 'editar_perfil.html', {'form': form})
+
+@login_required
+@user_passes_test(es_profesor)
+def asignar_calificacion(request, curso_id):
+    if request.user.user_type != 'teacher':
+        return redirect('home')  # Redirigir a una página adecuada si no es profesor
+    
+    curso = get_object_or_404(Curso, id=curso_id, profesor=request.user)
+
+    if request.method == 'POST':
+        form = CalificacionForm(request.POST, profesor=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('asignar_calificacion')  # Redirigir a la misma página después de guardar
+    else:
+        form = CalificacionForm(profesor=request.user)
+
+    return render(request, 'asignar_calificacion.html', {'form': form, 'curso': curso})

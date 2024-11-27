@@ -1,0 +1,22 @@
+<!-- templates/asignar_calificacion.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar Calificación</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Asignar Calificación</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar Calificación</button>
+        </form>
+        <a href="{% url 'detalle_curso' curso.id %}">Volver al detalle de curso</a>
+    </div>
+</body>
+</html>

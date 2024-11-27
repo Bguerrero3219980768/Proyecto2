@@ -15,9 +15,11 @@ from .views import (
     detalle_curso_estudiante,
     recuperar_clave,  # Asegúrate de importar la vista
     editar_perfil,
+    asignar_calificacion,
 )
 
 urlpatterns = [
+    path('', login, name='login'),
     path('login/', login, name='login'),
     path('logout/', logout, name="logout"),
     path('recuperar-clave/', recuperar_clave, name='recuperar_clave'),
@@ -34,4 +36,5 @@ urlpatterns = [
     path('detalle-curso/<int:curso_id>/', detalle_curso_estudiante, name='detalle_curso_estudiante'),
     path('recuperar-clave/', recuperar_clave, name='recuperar_clave'),  # Nueva URL para recuperar clave
     path('editar-perfil/', editar_perfil, name='editar_perfil'),
+    path('curso/<int:curso_id>/asignar_calificacion/', asignar_calificacion, name='asignar_calificacion'),
 ]
