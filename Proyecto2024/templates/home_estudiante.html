@@ -86,7 +86,8 @@
                             <strong>Descripción:</strong> {{ inscripcion.curso.descripcion }} <br>
                             <strong>Profesor:</strong> {{ inscripcion.curso.profesor.username }} <br>
                             <strong>Fecha de inscripción:</strong> {{ inscripcion.fecha_inscripcion }} <br>
-                            <a href="{% url 'detalle_curso_estudiante' inscripcion.curso.id %}">Ver detalles del curso</a>
+                            <!-- Cambiado de enlace a botón -->
+                            <a href="{% url 'detalle_curso_estudiante' inscripcion.curso.id %}" class="course-detail-button">Ver detalles del curso</a>
                         </li>
                         <hr>
                     {% endfor %}
@@ -99,30 +100,16 @@
         <div class="section">
             <h2>Cursos Disponibles</h2>
             <div class="dropdown">
-                <a href="{% url 'lista_cursos' %}">
-                    <button>Listar cursos</button>
+                <!-- Cambiado de enlace a botón con la clase "list-courses-button" -->
+                <a href="{% url 'lista_cursos' %}" class="list-courses-button">
+                    Listar cursos
                 </a>
-                <div class="dropdown-content">
-                    <ul>
-                        <li>Programación Avanzada</li>
-                        <li>Inglés Técnico</li>
-                        <li>Electrónica Básica</li>
-                    </ul>
+            </div>
+        </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // Si prefieres manejar el despliegue con JS en lugar de CSS hover:
-        const dropdownButton = document.querySelector('.dropdown button');
-        const dropdownContent = document.querySelector('.dropdown-content');
-
-        dropdownButton.addEventListener('click', () => {
-            const isHidden = dropdownContent.style.display === 'none' || dropdownContent.style.display === '';
-            dropdownContent.style.display = isHidden ? 'block' : 'none';
-        });
-    </script>
 </body>
 
 </html>
