@@ -139,3 +139,15 @@ th {
     border-left: 4px solid #a80808;
     background-color: #bababa;
 }
+/* Estilo para el pie de página */
+.footer {
+    background-color: #333333;
+    color: #ffffff;
+    text-align: center;
+    padding: 2px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 12px;
+}
+
