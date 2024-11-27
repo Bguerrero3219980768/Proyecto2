@@ -16,7 +16,9 @@
             {{ form.as_p }}
             <button type="submit">Guardar Calificación</button>
         </form>
-        <a href="{% url 'detalle_curso' curso.id %}">Volver al detalle de curso</a>
+        <a href="{% url 'detalle_curso' curso.id %}">
+            <button>Volver al detalle de curso</button> 
+        </a>
     </div>
 </body>
 </html>

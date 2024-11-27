@@ -228,7 +228,10 @@ def asignar_calificacion(request, curso_id):
         form = CalificacionForm(request.POST, profesor=request.user)
         if form.is_valid():
             form.save()
-            return redirect('asignar_calificacion')  # Redirigir a la misma página después de guardar
+             # Agregar mensaje de éxito
+            messages.success(request, 'Calificación asignada correctamente.')
+            # Redirigir al detalle del curso después de guardar la calificación
+            return redirect('detalle_curso', curso_id=curso.id)
     else:
         form = CalificacionForm(profesor=request.user)
 

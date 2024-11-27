@@ -11,5 +11,8 @@
         {{ form.as_p }}
         <button type="submit">Crear Evaluación</button>
     </form>
+    <a href="{% url 'detalle_curso' curso.id %}">
+        <button>Volver al detalle de curso</button> 
+    </a>
 </body>
 </html>

@@ -1,27 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Detalles del Curso</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
 </head>
+
 <body>
+    <a href="{% url 'home_profesor' %}">
+        <button>Volver al inicio</button>
+    </a>
+    <!-- Mostrar mensajes de éxito -->
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     <h1>Detalles del Curso: {{ curso.nombre }}</h1>
     <p>{{ curso.descripcion }}</p>
 
     <div class="section">
         <h2>Evaluaciones</h2>
         {% if curso.evaluacion_set.all %}
-            <ul>
-                {% for evaluacion in curso.evaluacion_set.all %}
-                    <li>{{ evaluacion.titulo }} - {{ evaluacion.fecha }}</li>
-                {% endfor %}
-            </ul>
+        <ul>
+            {% for evaluacion in curso.evaluacion_set.all %}
+            <li>{{ evaluacion.titulo }} - {{ evaluacion.fecha }}</li>
+            {% endfor %}
+        </ul>
         {% else %}
-            <p>No hay evaluaciones para este curso.</p>
+        <p>No hay evaluaciones para este curso.</p>
         {% endif %}
-        <a href="{% url 'crear_evaluacion' curso.id %}">Crear Nueva Evaluación</a>
+        <a href="{% url 'crear_evaluacion' curso.id %}">
+            <button>Crear Nueva Evaluación</button>
+        </a>
         <br>
-        <a href="{% url 'asignar_calificacion' curso.id %}">Asignar Calificaciones</a>
+        <a href="{% url 'asignar_calificacion' curso.id %}">
+            <button>Asignar Calificaciones</button>
+        </a>
     </div>
 </body>
+
 </html>
