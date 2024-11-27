@@ -27,25 +27,62 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para los elementos de la lista de cursos */
-.course-item {
-    margin: 10px 0;
-}
-
-/* Estilo para el botón del curso (rojo con texto blanco) */
-.course-button {
-    background-color: #a80808;  /* Rojo */
-    color: white;
-    border: none;
+/* Estilo para los botones generales */
+button {
     padding: 10px 20px;
     font-size: 16px;
-    cursor: pointer;
     border-radius: 5px;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.course-button:hover {
+/* Botón rojo con texto blanco */
+.red-button {
+    background-color: #a80808;  /* Rojo */
+    color: white;
+    border: none;
+}
+
+.red-button:hover {
     background-color: #8b0000; /* Rojo oscuro al pasar el mouse */
+}
+
+/* Botón de Cerrar sesión con fondo blanco y texto rojo */
+.logout-button {
+    background-color: white; /* Fondo blanco */
+    color: #a80808; /* Texto rojo */
+    border: 2px solid #a80808; /* Borde rojo */
+}
+
+.logout-button:hover {
+    background-color: #f8f8f8; /* Fondo gris claro al pasar el mouse */
+    color: #8b0000; /* Texto rojo oscuro */
+    border-color: #8b0000; /* Borde rojo oscuro al pasar el mouse */
+}
+
+/* Estilo para el botón de "Listar cursos" (azul claro con texto blanco) */
+.list-courses-button {
+    background-color: #00bfff;  /* Azul claro */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;  /* Para quitar el subrayado del enlace */
+    font-size: 16px;
+    border-radius: 5px;
+    display: inline-block;  /* Hace que el enlace se comporte como un bloque, permitiendo el padding */
+    transition: background-color 0.3s;
+}
+
+.list-courses-button:hover {
+    background-color: #008cff; /* Azul más oscuro al pasar el mouse */
+}
+
+ul {
+    list-style-type: none; /* Elimina los puntos predeterminados */
+    padding-left: 0; /* Elimina el margen izquierdo */
+}
+/* Estilo para los elementos de la lista de cursos */
+.course-item {
+    margin: 10px 0;
 }
 
 /* Estilo para el botón de inscripción (verde con texto blanco) */
@@ -77,22 +114,6 @@ body {
 
 .course-detail-button:hover {
     background-color: #8b0000; /* Rojo oscuro al pasar el mouse */
-}
-
-/* Estilo para el botón de "Listar cursos" (azul claro con texto blanco) */
-.list-courses-button {
-    background-color: #00bfff;  /* Azul claro */
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;  /* Para quitar el subrayado del enlace */
-    font-size: 16px;
-    border-radius: 5px;
-    display: inline-block;  /* Hace que el enlace se comporte como un bloque, permitiendo el padding */
-    transition: background-color 0.3s;
-}
-
-.list-courses-button:hover {
-    background-color: #008cff; /* Azul más oscuro al pasar el mouse */
 }
 
 /* Estilo para la tabla, si es necesario */

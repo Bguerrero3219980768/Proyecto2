@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Verificación de Cuenta</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'verified.css' %}">
 </head>
 <body>
-    <h1>Verificación de Cuenta</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Verificar</button>
-    </form>
+    <div class="container">
+        <h1>Verificación de Cuenta</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Verificar</button>
+        </form>
+    </div>
 </body>
 </html>

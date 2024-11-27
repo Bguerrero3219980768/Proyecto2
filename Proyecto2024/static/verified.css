@@ -1,0 +1,72 @@
+/* Estilos básicos comunes a todo el sitio */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background-color: #ffffff;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    color: #a80808; /* Rojo del sitio */
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #a80808; /* Rojo */
+    color: white;
+    border: none;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #8b0000; /* Rojo oscuro */
+}
+
+form p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Estilo para los campos del formulario */
+form input[type="text"], form input[type="password"], form input[type="email"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form input[type="text"]:focus, form input[type="password"]:focus, form input[type="email"]:focus {
+    border-color: #a80808; /* Rojo al enfocar */
+}
+
