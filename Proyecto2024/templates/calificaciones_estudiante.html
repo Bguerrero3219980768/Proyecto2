@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Calificaciones</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Mis Calificaciones</h1>
+        <a href="{% url 'home_estudiante' %}">
+            <button>Volver al inicio</button>
+        </a>
+
+        {% if cursos_con_calificaciones %}
+            {% for item in cursos_con_calificaciones %}
+                <h2>Curso: {{ item.curso.nombre }}</h2>
+                <ul>
+                    {% for calificacion_item in item.calificaciones %}
+                        <li>
+                            <strong>Evaluación:</strong> {{ calificacion_item.evaluacion.titulo }} <br>
+                            
+                            <strong>Calificación:</strong> 
+                            {% if calificacion_item.calificacion %}
+                                {{ calificacion_item.calificacion.calificacion|floatformat:2 }}/5.0
+                            {% else %}
+                                No calificado aún
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% else %}
+            <p>No tienes calificaciones registradas.</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>

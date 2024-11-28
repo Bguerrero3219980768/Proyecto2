@@ -14,13 +14,13 @@
     </a>
     <!-- Mostrar mensajes de éxito -->
     {% if messages %}
-    <div class="messages">
+    <ul class="messages">
         {% for message in messages %}
-        <div class="alert {{ message.tags }}">
+        <li class="{% if message.tags %}{{ message.tags }}{% endif %}">
             {{ message }}
-        </div>
+        </li>
         {% endfor %}
-    </div>
+    </ul>
     {% endif %}
     <h1>Detalles del Curso: {{ curso.nombre }}</h1>
     <p>{{ curso.descripcion }}</p>

@@ -143,12 +143,6 @@ def crear_evaluacion(request, curso_id):
         form = EvaluacionForm()
     return render(request, 'crear_evaluacion.html', {'form': form, 'curso': curso})
 
-# 8. Vista para que los estudiantes vean sus calificaciones
-@user_passes_test(es_estudiante)
-def ver_calificaciones(request):
-    calificaciones = Calificacion.objects.filter(estudiante=request.user)
-    return render(request, 'ver_calificaciones.html', {'calificaciones': calificaciones})
-
 # 9. Vista para ver los detalles de un curso (tanto estudiantes como profesores)
 def detalle_curso(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
@@ -161,14 +155,25 @@ def detalle_curso(request, curso_id):
 
 @login_required
 def detalle_curso_estudiante(request, curso_id):
-    # Verificar que el curso pertenece al estudiante
     curso = get_object_or_404(Curso, id=curso_id)
-    inscripcion = Inscripcion.objects.filter(estudiante=request.user, curso=curso).exists()
+    estudiante = request.user  # Usuario actual logueado
 
-    if not inscripcion:
-        return redirect('home_estudiante')  # Redirige si no está inscrito en el curso
+    # Obtener todas las evaluaciones del curso
+    evaluaciones = curso.evaluacion_set.all()
 
-    return render(request, 'detalle_curso_estudiante.html', {'curso': curso})
+    # Obtener las calificaciones del estudiante para las evaluaciones del curso
+    calificaciones = Calificacion.objects.filter(estudiante=estudiante, evaluacion__curso=curso)
+
+    # Crear un diccionario para mapear evaluaciones con sus calificaciones
+    evaluaciones_con_calificaciones = {
+        evaluacion: calificaciones.filter(evaluacion=evaluacion).first()
+        for evaluacion in evaluaciones
+    }
+
+    return render(request, 'detalle_curso_estudiante.html', {
+        'curso': curso,
+        'evaluaciones_con_calificaciones': evaluaciones_con_calificaciones
+    })
 
 User = get_user_model()
 
@@ -216,6 +221,7 @@ def editar_perfil(request):
 
     return render(request, 'editar_perfil.html', {'form': form})
 
+
 @login_required
 @user_passes_test(es_profesor)
 def asignar_calificacion(request, curso_id):
@@ -236,3 +242,27 @@ def asignar_calificacion(request, curso_id):
         form = CalificacionForm(profesor=request.user)
 
     return render(request, 'asignar_calificacion.html', {'form': form, 'curso': curso})
+
+@login_required
+@user_passes_test(es_estudiante)
+def calificaciones_estudiante(request):
+    cursos_con_calificaciones = []
+
+    # Obtener todos los cursos en los que el estudiante está inscrito
+    cursos_inscritos = Curso.objects.filter(inscripcion__estudiante=request.user)
+
+    for curso in cursos_inscritos:
+        evaluaciones = curso.evaluacion_set.all()
+        calificaciones = [
+            {
+                'evaluacion': evaluacion,
+                'calificacion': Calificacion.objects.filter(evaluacion=evaluacion, estudiante=request.user).first()
+            }
+            for evaluacion in evaluaciones
+        ]
+        cursos_con_calificaciones.append({
+            'curso': curso,
+            'calificaciones': calificaciones
+        })
+
+    return render(request, 'calificaciones_estudiante.html', {'cursos_con_calificaciones': cursos_con_calificaciones})

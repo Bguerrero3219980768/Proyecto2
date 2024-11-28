@@ -75,6 +75,9 @@ class Calificacion(models.Model):
     estudiante = models.ForeignKey(CustomUser, limit_choices_to={'user_type': 'student'}, on_delete=models.CASCADE)
     evaluacion = models.ForeignKey(Evaluacion, on_delete=models.CASCADE)
     calificacion = models.DecimalField(max_digits=5, decimal_places=2)
+    
+    class Meta:
+        unique_together = ('estudiante', 'evaluacion')  # Restricción de unicidad
 
     def __str__(self):
         return f"{self.estudiante.username} - {self.evaluacion.titulo} - {self.calificacion}"

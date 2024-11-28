@@ -22,14 +22,21 @@
         </div>
         <div class="section">
             <h2>Evaluaciones</h2>
-            {% if curso.evaluacion_set.exists %}
+            {% if evaluaciones_con_calificaciones %}
                 <ul>
-                    {% for evaluacion in curso.evaluacion_set.all %}
+                    {% for evaluacion, calificacion in evaluaciones_con_calificaciones.items %}
                         <li>
                             <strong>Título:</strong> {{ evaluacion.titulo }} <br>
                             <strong>Descripción:</strong> {{ evaluacion.descripcion }} <br>
-                            <strong>Fecha:</strong> {{ evaluacion.fecha }}
+                            <strong>Fecha:</strong> {{ evaluacion.fecha }} <br>
+                            <strong>Calificación:</strong>
+                            {% if calificacion %}
+                                {{ calificacion.calificacion }}/5.0
+                            {% else %}
+                                No calificado aún
+                            {% endif %}
                         </li>
+                        <hr>
                     {% endfor %}
                 </ul>
             {% else %}

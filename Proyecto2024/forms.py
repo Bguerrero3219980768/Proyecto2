@@ -49,6 +49,15 @@ class CalificacionForm(forms.ModelForm):
             id__in=Inscripcion.objects.filter(curso__profesor=profesor).values('estudiante')
         )
         
+    def clean(self):
+        cleaned_data = super().clean()
+        estudiante = cleaned_data.get("estudiante")
+        evaluacion = cleaned_data.get("evaluacion")
+
+        if Calificacion.objects.filter(estudiante=estudiante, evaluacion=evaluacion).exists():
+            raise forms.ValidationError("Ya existe una calificación para esta evaluación y estudiante.")
+        return cleaned_data
+        
     def clean_calificacion(self):
         calificacion = self.cleaned_data.get('calificacion')
         if calificacion < 0 or calificacion > 5:
