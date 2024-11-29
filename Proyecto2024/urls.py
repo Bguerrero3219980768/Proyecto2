@@ -16,6 +16,7 @@ from .views import (
     editar_perfil,
     asignar_calificacion,
     calificaciones_estudiante,
+    generar_reporte_pdf,
 )
 
 urlpatterns = [
@@ -37,4 +38,5 @@ urlpatterns = [
     path('editar-perfil/', editar_perfil, name='editar_perfil'),
     path('curso/<int:curso_id>/asignar_calificacion/', asignar_calificacion, name='asignar_calificacion'),
     path('calificaciones/', calificaciones_estudiante, name='calificaciones_estudiante'),
+    path('generar_reporte_pdf/', generar_reporte_pdf, name='generar_reporte_pdf'),
 ]
