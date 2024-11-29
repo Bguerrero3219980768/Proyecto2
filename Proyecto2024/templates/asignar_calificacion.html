@@ -14,15 +14,16 @@
         <h1>Asignar Calificación</h1>
     </div>
     <div class="section">
+        <a href="{% url 'detalle_curso' curso.id %}">
+            <button class="red-button">Volver al detalle de curso</button> 
+        </a>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="button-group">
             <button class="red-button">Guardar Calificación</button>
         </form>
-        <a href="{% url 'detalle_curso' curso.id %}">
-            <button class="red-button">Volver al detalle de curso</button> 
-        </a>
+        
     </div>
     </div>
 </body>
