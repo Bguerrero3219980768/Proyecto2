@@ -13,7 +13,10 @@
     <div class="container">
         <h1>Mis Calificaciones</h1>
         <a href="{% url 'home_estudiante' %}">
-            <button>Volver al inicio</button>
+            <button class="red-button">Volver al inicio</button>
+        </a>
+        <a href="{% url 'generar_reporte_pdf' %}">
+            <button>Descargar Reporte PDF</button>
         </a>
 
         {% if cursos_con_calificaciones %}

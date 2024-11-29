@@ -4,7 +4,9 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login as auth_login, get_user_model, logout as auth_logout
 from django.contrib.auth.decorators import user_passes_test, login_required
-from django.http import HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden
+from xhtml2pdf import pisa
+from django.template.loader import get_template
 from django.conf import settings
 from django.core.mail import send_mail
 from .models import CustomUser, VerificationCode, Curso, Inscripcion, Evaluacion, Calificacion
@@ -266,3 +268,38 @@ def calificaciones_estudiante(request):
         })
 
     return render(request, 'calificaciones_estudiante.html', {'cursos_con_calificaciones': cursos_con_calificaciones})
+
+def generar_reporte_pdf(request):
+    cursos_con_calificaciones = []
+
+    # Obtener todos los cursos y evaluaciones del estudiante actual
+    cursos_inscritos = Curso.objects.filter(inscripcion__estudiante=request.user)
+
+    for curso in cursos_inscritos:
+        evaluaciones = curso.evaluacion_set.all()
+        calificaciones = [
+            {
+                'evaluacion': evaluacion,
+                'calificacion': Calificacion.objects.filter(evaluacion=evaluacion, estudiante=request.user).first()
+            }
+            for evaluacion in evaluaciones
+        ]
+        cursos_con_calificaciones.append({
+            'curso': curso,
+            'calificaciones': calificaciones
+        })
+
+    # Cargar plantilla de PDF
+    template_path = 'reporte_calificaciones.html'
+    context = {'cursos_con_calificaciones': cursos_con_calificaciones, 'estudiante': request.user}
+
+    # Renderizar HTML y convertir a PDF
+    template = get_template(template_path)
+    html = template.render(context)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="reporte_calificaciones.pdf"'
+    pisa_status = pisa.CreatePDF(html, dest=response)
+
+    if pisa_status.err:
+        return HttpResponse('Error al generar el PDF')
+    return response
