@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +10,13 @@
 
 <body>
     <div class="container">
-        <h1>Mis Calificaciones</h1>
+        <div class="header">
         <a href="{% url 'home_estudiante' %}">
-            <button>Volver al inicio</button>
+            <button class="logout-button">Volver al inicio</button>
         </a>
-
+        <h1>Mis calificaciones</h1>
+    </div>
+        <div class="section">
         {% if cursos_con_calificaciones %}
             {% for item in cursos_con_calificaciones %}
                 <h2>Curso: {{ item.curso.nombre }}</h2>
@@ -37,6 +38,7 @@
         {% else %}
             <p>No tienes calificaciones registradas.</p>
         {% endif %}
+    </div>
     </div>
 </body>
 

@@ -6,19 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asignar Calificación</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'styles2.css' %}">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
 </head>
 <body>
     <div class="container">
+        <div class="header">
         <h1>Asignar Calificación</h1>
+    </div>
+    <div class="section">
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Guardar Calificación</button>
+            <div class="button-group">
+            <button class="red-button">Guardar Calificación</button>
         </form>
         <a href="{% url 'detalle_curso' curso.id %}">
-            <button>Volver al detalle de curso</button> 
+            <button class="red-button">Volver al detalle de curso</button> 
         </a>
+    </div>
     </div>
 </body>
 </html>

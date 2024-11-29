@@ -11,7 +11,7 @@
     <div class="container">
         <div class="header">
             <a href="{% url 'home_estudiante' %}">
-                <button>Volver al inicio</button>
+                <button class="logout-button">Volver al inicio</button>
             </a>
             <h1>Editar Perfil</h1>
         </div>
@@ -19,7 +19,7 @@
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit">Guardar Cambios</button>
+                <button class="red-button">Guardar Cambios</button>
             </form>
         </div>
     </div>

@@ -11,7 +11,7 @@
 <div class="container">
     <div class="header">
         <a href="{% url 'logout' %}">
-            <button>Cerrar sesión</button>
+            <button class="logout-button">Cerrar sesión</button>
         </a>
         <h1>Inicio</h1>
         <p>¡Inicio de sesión correcto! Bienvenido, Profesor {{ user.username }}.</p>
@@ -128,7 +128,9 @@
             {% for curso in cursos %}
             <li>
                 <strong>{{ curso.nombre }}</strong> - {{ curso.descripcion }}
-                <a href="{% url 'detalle_curso' curso.id %}">Ver detalles</a>
+                <a href="{% url 'detalle_curso' curso.id %}">
+                    <button class="red-button">Ver Detalles</button>
+                </a>
             </li>
             {% endfor %}
         </ul>

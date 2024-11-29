@@ -80,6 +80,7 @@ ul {
     list-style-type: none; /* Elimina los puntos predeterminados */
     padding-left: 0; /* Elimina el margen izquierdo */
 }
+
 /* Estilo para los elementos de la lista de cursos */
 .course-item {
     margin: 10px 0;
@@ -139,6 +140,7 @@ th {
     border-left: 4px solid #a80808;
     background-color: #bababa;
 }
+
 /* Estilo para el pie de página */
 .footer {
     background-color: #333333;
@@ -151,3 +153,13 @@ th {
     font-size: 12px;
 }
 
+/* Estilo para agrupar botones juntos */
+.button-group {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px; /* Espacio entre botones */
+}
+
+.button-group a {
+    text-decoration: none; /* Elimina subrayado */
+}

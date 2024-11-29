@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <title>Crear Evaluación</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'styles2.css' %}">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
 </head>
 <body>
+    <div class="container">
+        <div class="header">
     <h1>Crear Evaluación para {{ curso.nombre }}</h1>
+</div>
+<div class="section">
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Crear Evaluación</button>
+        <div class="button-group">
+        <button class="red-button">Crear Evaluación</button>
     </form>
     <a href="{% url 'detalle_curso' curso.id %}">
-        <button>Volver al detalle de curso</button> 
+        <button class="red-button">Volver al detalle de curso</button> 
     </a>
+</div>
+</div>
 </body>
 </html>
