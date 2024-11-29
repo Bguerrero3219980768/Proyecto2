@@ -12,15 +12,16 @@
     <h1>Crear Evaluación para {{ curso.nombre }}</h1>
 </div>
 <div class="section">
+    <a href="{% url 'detalle_curso' curso.id %}">
+        <button class="red-button">Volver al detalle de curso</button> 
+    </a>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <div class="button-group">
         <button class="red-button">Crear Evaluación</button>
     </form>
-    <a href="{% url 'detalle_curso' curso.id %}">
-        <button class="red-button">Volver al detalle de curso</button> 
-    </a>
+    
 </div>
 </div>
 </body>
